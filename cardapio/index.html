@@ -8,495 +8,72 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Barlow+Condensed:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --black:#0d0c0a;
-  --black-2:#181310;
-  --black-3:#231a14;
-  --orange:#ef7d1c;
-  --orange-deep:#c85a0e;
-  --gold:#f5b91a;
-  --cream:#f3e9d6;
-  --cream-dim:#cabfa9;
-  --leather:#2a1810;
-  --leather-2:#4a2f1c;
-  --promo:#e0393e;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--cream);font-family:'Karla',sans-serif;min-height:100vh;padding-bottom:90px;}
-h1,h2,h3,.display{font-family:'Rye',cursive;font-weight:400;letter-spacing:.5px;}
-.label{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1.5px;}
-a{color:inherit;}
-img{display:block;max-width:100%;}
-button{font-family:inherit;cursor:pointer;}
-
-.horizon{width:100%;display:block;color:var(--gold);}
-.horizon.flip{transform:scaleY(-1);}
-
-header{background:var(--black);padding:28px 20px 0;text-align:center;position:relative;}
-.logo-wrap{width:150px;margin:0 auto 6px;border-radius:22px;overflow:hidden;box-shadow:0 0 0 3px var(--leather-2), 0 8px 24px rgba(0,0,0,.6);}
-.logo-wrap img{width:100%;display:block;}
-.tagline{color:var(--cream-dim);font-size:.95rem;margin-top:8px;font-style:italic;}
-.hero-title{color:var(--gold);font-size:2.4rem;margin-top:18px;text-shadow:0 2px 0 var(--orange-deep);}
-.hero-sub{color:var(--cream-dim);font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:.85rem;margin-top:4px;}
-
-/* banner de promoção do dia */
-.promo-banner{
-  max-width:640px;margin:18px auto 0;padding:0 16px;
-}
-.promo-banner-inner{
-  background:linear-gradient(90deg,var(--promo),#8f1f22);
-  border-radius:12px;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 6px 16px rgba(224,57,62,.3);
-}
-.promo-banner-inner .icon{font-size:1.4rem;}
-.promo-banner-inner .txt strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;letter-spacing:.5px;}
-.promo-banner-inner .txt span{font-size:.82rem;color:#ffe3e3;}
-
-.cat-nav{display:flex;gap:10px;overflow-x:auto;padding:18px 16px;background:var(--black);position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(245,185,26,.15);scrollbar-width:none;}
-.cat-nav::-webkit-scrollbar{display:none;}
-.cat-btn{flex:0 0 auto;background:var(--black-3);color:var(--cream-dim);border:1px solid rgba(245,185,26,.25);border-radius:999px;padding:8px 18px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.9rem;transition:.2s;}
-.cat-btn.active{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:var(--black);border-color:transparent;font-weight:700;}
-
-main{padding:8px 16px 20px;max-width:640px;margin:0 auto;}
-.section-title{color:var(--gold);font-size:1.5rem;margin:28px 0 4px;display:flex;align-items:center;gap:10px;}
-.section-title::after{content:'';flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--orange) 0 8px,transparent 8px 14px);opacity:.6;}
-
-.item-card{display:flex;gap:14px;background:var(--black-2);border-radius:14px;padding:12px;margin-bottom:14px;border:1px solid rgba(245,185,26,.08);position:relative;}
-.item-card.is-promo{border-color:rgba(224,57,62,.5);}
-.promo-ribbon{
-  position:absolute;top:-8px;left:10px;
-  background:var(--promo);color:#fff;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;
-  padding:3px 9px;border-radius:5px;
-  box-shadow:0 2px 6px rgba(0,0,0,.4);
-}
-
-.frame{position:relative;width:108px;height:108px;flex:0 0 auto;border-radius:10px;overflow:hidden;background:var(--leather);box-shadow:inset 0 0 0 4px var(--leather-2), 0 4px 10px rgba(0,0,0,.5);}
-.frame img{width:100%;height:100%;object-fit:cover;filter:sepia(.15) contrast(1.05);}
-.frame.has-photo{cursor:pointer;}
-.frame.no-photo{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--leather),var(--black-3));}
-.frame.no-photo svg{width:46px;height:46px;color:var(--gold);opacity:.55;}
-.zoom-hint{
-  position:absolute;top:5px;left:5px;
-  width:22px;height:22px;border-radius:50%;
-  background:rgba(13,12,10,.65);
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
-}
-.zoom-hint svg{width:13px;height:13px;color:var(--cream);}
-
-.zoom-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.9);
-  display:none;align-items:center;justify-content:center;
-  z-index:100;padding:24px;
-}
-.zoom-overlay.show{display:flex;}
-.zoom-overlay img{
-  max-width:100%;max-height:85vh;border-radius:12px;
-  box-shadow:0 10px 40px rgba(0,0,0,.6);
-}
-.zoom-overlay .zoom-close{
-  position:absolute;top:18px;right:20px;
-  background:rgba(255,255,255,.12);border:none;color:var(--cream);
-  width:38px;height:38px;border-radius:50%;font-size:1.5rem;line-height:1;
-}
-.zoom-overlay .zoom-caption{
-  position:absolute;bottom:26px;left:0;right:0;text-align:center;
-  color:var(--cream-dim);font-family:'Barlow Condensed',sans-serif;
-  letter-spacing:.5px;font-size:.95rem;
-}
-.price-tag{position:absolute;bottom:5px;right:5px;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;padding:2px 7px;border-radius:5px;box-shadow:0 2px 4px rgba(0,0,0,.5);letter-spacing:.3px;}
-
-.item-info{flex:1;min-width:0;display:flex;flex-direction:column;}
-.item-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;color:var(--cream);letter-spacing:.3px;}
-.item-desc{color:var(--cream-dim);font-size:.82rem;margin-top:3px;line-height:1.35;flex:1;}
-.item-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
-.item-price{color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;}
-.item-price .old{color:var(--cream-dim);text-decoration:line-through;font-weight:500;font-size:.85rem;margin-right:6px;}
-
-.stepper{display:flex;align-items:center;gap:0;background:var(--black-3);border-radius:8px;overflow:hidden;border:1px solid rgba(245,185,26,.2);}
-.stepper button{background:none;border:none;color:var(--gold);width:30px;height:30px;font-size:1.1rem;font-weight:700;}
-.stepper button:active{background:rgba(245,185,26,.15);}
-.stepper .qty{min-width:22px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--cream);}
-.add-btn{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;border:none;border-radius:8px;padding:7px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:.85rem;}
-
-.cart-bar{position:fixed;left:16px;right:16px;bottom:16px;max-width:608px;margin:0 auto;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;border-radius:14px;padding:14px 18px;display:none;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:30;border:none;width:calc(100% - 32px);}
-.cart-bar.show{display:flex;}
-.cart-bar .count{background:#1a0f06;color:var(--gold);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;margin-right:10px;}
-.cart-bar .cart-left{display:flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
-.cart-bar .cart-total{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;}
-
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:40;}
-.overlay.show{display:block;}
-.drawer{position:fixed;right:0;top:0;bottom:0;width:100%;max-width:420px;background:var(--black-2);z-index:50;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;border-left:1px solid rgba(245,185,26,.15);}
-.drawer.show{transform:translateX(0);}
-.drawer-header{padding:18px 18px 14px;border-bottom:1px solid rgba(245,185,26,.15);display:flex;align-items:center;justify-content:space-between;}
-.drawer-header h2{color:var(--gold);font-size:1.4rem;}
-.close-btn{background:none;border:none;color:var(--cream-dim);font-size:1.6rem;line-height:1;}
-.drawer-body{flex:1;overflow-y:auto;padding:14px 18px;}
-.cart-line{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(245,185,26,.08);}
-.cart-line-name{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--cream);font-size:.95rem;}
-.cart-line-price{color:var(--cream-dim);font-size:.8rem;}
-.cart-line-remove{background:none;border:none;color:var(--orange);font-size:.78rem;text-decoration:underline;font-family:'Barlow Condensed',sans-serif;}
-.empty-cart{text-align:center;color:var(--cream-dim);padding:40px 10px;font-size:.9rem;}
-
-.checkout-form{padding:14px 18px 4px;border-top:1px solid rgba(245,185,26,.15);}
-.checkout-form .field{margin-bottom:12px;}
-.checkout-form label{display:block;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.78rem;color:var(--cream-dim);margin-bottom:5px;}
-.checkout-form input[type=text],.checkout-form input[type=tel],.checkout-form textarea,.checkout-form select{width:100%;background:var(--black-3);border:1px solid rgba(245,185,26,.2);border-radius:8px;padding:10px 12px;color:var(--cream);font-family:'Karla',sans-serif;font-size:.92rem;}
-.checkout-form textarea{resize:vertical;min-height:54px;}
-.radio-row{display:flex;gap:10px;}
-.radio-opt{flex:1;text-align:center;padding:9px 6px;border-radius:8px;background:var(--black-3);border:1px solid rgba(245,185,26,.2);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;color:var(--cream-dim);letter-spacing:.5px;}
-.radio-opt input{display:none;}
-.radio-opt.active{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;font-weight:700;border-color:transparent;}
-#addr-field{display:none;}
-
-.drawer-footer{padding:14px 18px 20px;border-top:1px solid rgba(245,185,26,.15);}
-.total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;}
-.total-row .lbl{color:var(--cream-dim);text-transform:uppercase;letter-spacing:1px;font-size:.85rem;}
-.total-row .val{color:var(--gold);font-size:1.5rem;font-weight:700;}
-.whats-btn{width:100%;background:linear-gradient(180deg,#3fb35a,#2c9944);color:#062a0f;border:none;border-radius:10px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;}
-.whats-btn:disabled{opacity:.4;}
-.form-hint{color:#c98a3d;font-size:.75rem;margin-top:8px;text-align:center;}
-
-footer{text-align:center;padding:26px 20px 10px;color:var(--cream-dim);font-size:.78rem;}
+:root{--black:#0d0c0a;--black-2:#181310;--black-3:#231a14;--orange:#ef7d1c;--orange-deep:#c85a0e;--gold:#f5b91a;--cream:#f3e9d6;--cream-dim:#cabfa9;--leather:#2a1810;--leather-2:#4a2f1c;--promo:#e0393e}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--black);color:var(--cream);font-family:'Karla',sans-serif;min-height:100vh;padding-bottom:90px}h1,h2,h3,.display{font-family:'Rye',cursive;font-weight:400;letter-spacing:.5px}img{display:block;max-width:100%}button{font-family:inherit;cursor:pointer}.horizon{width:100%;display:block;color:var(--gold)}.horizon.flip{transform:scaleY(-1)}
+header{background:var(--black);padding:28px 20px 0;text-align:center}.logo-wrap{width:150px;margin:0 auto 6px;border-radius:22px;overflow:hidden;box-shadow:0 0 0 3px var(--leather-2),0 8px 24px rgba(0,0,0,.6)}.logo-wrap img{width:100%}.tagline{color:var(--cream-dim);font-size:.95rem;margin-top:8px;font-style:italic}.hero-title{color:var(--gold);font-size:2.4rem;margin-top:18px;text-shadow:0 2px 0 var(--orange-deep)}.hero-sub{color:var(--cream-dim);font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:.85rem;margin-top:4px}
+.promo-banner{max-width:640px;margin:18px auto 0;padding:0 16px}.promo-banner-inner{background:linear-gradient(90deg,var(--promo),#8f1f22);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 16px rgba(224,57,62,.3)}.promo-banner-inner .icon{font-size:1.4rem}.promo-banner-inner .txt strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem}.promo-banner-inner .txt span{font-size:.82rem;color:#ffe3e3}
+.cat-nav{display:flex;gap:10px;overflow-x:auto;padding:18px 16px;background:var(--black);position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(245,185,26,.15);scrollbar-width:none}.cat-nav::-webkit-scrollbar{display:none}.cat-btn{flex:0 0 auto;background:var(--black-3);color:var(--cream-dim);border:1px solid rgba(245,185,26,.25);border-radius:999px;padding:8px 18px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.9rem}.cat-btn.active{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:var(--black);border-color:transparent;font-weight:700}
+main{padding:8px 16px 20px;max-width:640px;margin:0 auto}.section-title{color:var(--gold);font-size:1.5rem;margin:28px 0 4px;display:flex;align-items:center;gap:10px}.section-title:after{content:'';flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--orange) 0 8px,transparent 8px 14px);opacity:.6}.item-card{display:flex;gap:14px;background:var(--black-2);border-radius:14px;padding:12px;margin-bottom:14px;border:1px solid rgba(245,185,26,.08);position:relative}.item-card.is-promo{border-color:rgba(224,57,62,.5)}.promo-ribbon{position:absolute;top:-8px;left:10px;background:var(--promo);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;text-transform:uppercase;padding:3px 9px;border-radius:5px}
+.frame{position:relative;width:108px;height:108px;flex:0 0 auto;border-radius:10px;overflow:hidden;background:var(--leather);box-shadow:inset 0 0 0 4px var(--leather-2),0 4px 10px rgba(0,0,0,.5)}.frame img{width:100%;height:100%;object-fit:cover;filter:sepia(.15) contrast(1.05)}.frame.has-photo{cursor:pointer}.frame.no-photo{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--leather),var(--black-3))}.frame.no-photo svg{width:46px;height:46px;color:var(--gold);opacity:.55}.zoom-hint{position:absolute;top:5px;left:5px;width:22px;height:22px;border-radius:50%;background:rgba(13,12,10,.65);display:flex;align-items:center;justify-content:center;pointer-events:none}.zoom-hint svg{width:13px;height:13px;color:var(--cream)}.price-tag{position:absolute;bottom:5px;right:5px;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;padding:2px 7px;border-radius:5px}
+.item-info{flex:1;min-width:0;display:flex;flex-direction:column}.item-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem}.item-desc{color:var(--cream-dim);font-size:.82rem;margin-top:3px;line-height:1.35;flex:1}.item-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px}.item-price{color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem}.item-price .old{color:var(--cream-dim);text-decoration:line-through;font-weight:500;font-size:.85rem;margin-right:6px}.stepper{display:flex;align-items:center;background:var(--black-3);border-radius:8px;overflow:hidden;border:1px solid rgba(245,185,26,.2)}.stepper button{background:none;border:none;color:var(--gold);width:30px;height:30px;font-size:1.1rem;font-weight:700}.stepper .qty{min-width:22px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700}.add-btn{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;border:none;border-radius:8px;padding:7px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:.85rem}
+.cart-bar{position:fixed;left:16px;right:16px;bottom:16px;max-width:608px;margin:0 auto;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;border-radius:14px;padding:14px 18px;display:none;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:30;border:none;width:calc(100% - 32px)}.cart-bar.show{display:flex}.cart-bar .count{background:#1a0f06;color:var(--gold);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;margin-right:10px}.cart-left{display:flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase}.cart-total{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:40}.overlay.show{display:block}.drawer{position:fixed;right:0;top:0;bottom:0;width:100%;max-width:420px;background:var(--black-2);z-index:50;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;border-left:1px solid rgba(245,185,26,.15)}.drawer.show{transform:translateX(0)}.drawer-header{padding:18px 18px 14px;border-bottom:1px solid rgba(245,185,26,.15);display:flex;align-items:center;justify-content:space-between}.drawer-header h2{color:var(--gold);font-size:1.4rem}.close-btn{background:none;border:none;color:var(--cream-dim);font-size:1.6rem}.drawer-body{flex:1;overflow-y:auto;padding:14px 18px}.cart-line{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(245,185,26,.08)}.cart-line-name{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.95rem}.cart-line-price{color:var(--cream-dim);font-size:.8rem}.cart-line-remove{background:none;border:none;color:var(--orange);font-size:.78rem;text-decoration:underline}.empty-cart{text-align:center;color:var(--cream-dim);padding:40px 10px;font-size:.9rem}
+.checkout-form{padding:14px 18px 4px;border-top:1px solid rgba(245,185,26,.15)}.field{margin-bottom:12px}.checkout-form label{display:block;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.78rem;color:var(--cream-dim);margin-bottom:5px}.checkout-form input,.checkout-form textarea,.checkout-form select{width:100%;background:var(--black-3);border:1px solid rgba(245,185,26,.2);border-radius:8px;padding:10px 12px;color:var(--cream);font-family:'Karla',sans-serif;font-size:.92rem}.checkout-form textarea{resize:vertical;min-height:54px}.pickup-box{background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:#1a0f06;border-radius:8px;padding:10px 12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.7px;text-align:center}.drawer-footer{padding:14px 18px 20px;border-top:1px solid rgba(245,185,26,.15)}.total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif}.total-row .lbl{color:var(--cream-dim);text-transform:uppercase}.total-row .val{color:var(--gold);font-size:1.5rem;font-weight:700}.whats-btn{width:100%;background:linear-gradient(180deg,#3fb35a,#2c9944);color:#062a0f;border:none;border-radius:10px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase}.whats-btn:disabled{opacity:.4}.form-hint{color:#c98a3d;font-size:.75rem;margin-top:8px;text-align:center}footer{text-align:center;padding:26px 20px 10px;color:var(--cream-dim);font-size:.78rem}
+.zoom-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}.zoom-overlay.show{display:flex}.zoom-overlay img{max-width:100%;max-height:85vh;border-radius:12px}.zoom-close{position:absolute;top:18px;right:20px;background:rgba(255,255,255,.12);border:none;color:var(--cream);width:38px;height:38px;border-radius:50%;font-size:1.5rem}.zoom-caption{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:var(--cream-dim)}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo-wrap"><img src="fotos/logo.jpg" alt="Cantin do Sertão"></div>
-  <p class="tagline">Sabor de sertão, na porta da sua casa</p>
-</header>
-
-<svg class="horizon" viewBox="0 0 1000 140" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
-  <circle cx="500" cy="46" r="16" fill="currentColor" stroke="none"/>
-  <g stroke-width="5">
-    <line x1="500" y1="8" x2="500" y2="-4"/><line x1="536" y1="18" x2="546" y2="8"/><line x1="464" y1="18" x2="454" y2="8"/>
-    <line x1="546" y1="46" x2="560" y2="46"/><line x1="454" y1="46" x2="440" y2="46"/>
-    <line x1="536" y1="74" x2="546" y2="84"/><line x1="464" y1="74" x2="454" y2="84"/>
-  </g>
-  <path d="M0,110 L120,70 L220,100 L340,55 L460,100 L560,60 L680,100 L800,72 L920,102 L1000,85" stroke-width="5"/>
-  <g stroke-width="5">
-    <line x1="70" y1="138" x2="70" y2="92"/>
-    <path d="M70,118 C56,118 54,105 60,100 C66,96 70,100 70,106"/>
-    <path d="M70,110 C84,110 86,98 80,93 C74,89 70,93 70,99"/>
-  </g>
-  <g stroke-width="5"><line x1="905" y1="138" x2="905" y2="98"/><path d="M905,122 C892,122 890,110 896,105 C901,101 905,105 905,111"/></g>
-  <g stroke-width="4" transform="translate(230,120)">
-    <path d="M-22,10 C-22,-6 -8,-14 0,-14 C8,-14 22,-6 22,10 C22,18 12,20 0,20 C-12,20 -22,18 -22,10 Z"/>
-    <line x1="-30" y1="-2" x2="-40" y2="-10"/><line x1="30" y1="-2" x2="40" y2="-10"/>
-    <circle cx="-9" cy="2" r="3" fill="currentColor" stroke="none"/><circle cx="9" cy="2" r="3" fill="currentColor" stroke="none"/>
-  </g>
-  <line x1="0" y1="138" x2="1000" y2="138" stroke-width="3" opacity=".5"/>
-</svg>
-
-<div style="text-align:center;">
-  <h1 class="hero-title">Cardápio</h1>
-  <p class="hero-sub">Peça pelo WhatsApp em poucos toques</p>
-</div>
-
-<div class="promo-banner" id="promoBanner" style="display:none">
-  <div class="promo-banner-inner">
-    <span class="icon">🔥</span>
-    <div class="txt"><strong id="promoTitle"></strong><span id="promoText"></span></div>
-  </div>
-</div>
-
-<nav class="cat-nav" id="catNav"></nav>
-<main id="main"></main>
-
-<svg class="horizon flip" viewBox="0 0 1000 140" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="opacity:.5;">
-  <path d="M0,110 L120,70 L220,100 L340,55 L460,100 L560,60 L680,100 L800,72 L920,102 L1000,85" stroke-width="5"/>
-  <line x1="0" y1="138" x2="1000" y2="138" stroke-width="3" opacity=".5"/>
-</svg>
-
-<footer>Cantin do Sertão — feito com carinho pra chegar quentinho até você 🌵</footer>
-
-<button class="cart-bar" id="cartBar">
-  <span class="cart-left"><span class="count" id="cartCount">0</span> ver carrinho</span>
-  <span class="cart-total" id="cartBarTotal">R$ 0,00</span>
-</button>
-
-<div class="zoom-overlay" id="zoomOverlay">
-  <button class="zoom-close" id="zoomClose">&times;</button>
-  <img id="zoomImg" src="" alt="">
-  <p class="zoom-caption" id="zoomCaption"></p>
-</div>
-
+<header><div class="logo-wrap"><img src="fotos/logo.jpg" alt="Cantin do Sertão"></div><p class="tagline">Sabor de sertão, feito pra você retirar quentinho</p></header>
+<svg class="horizon" viewBox="0 0 1000 140" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="500" cy="46" r="16" fill="currentColor" stroke="none"/><path d="M0,110 L120,70 L220,100 L340,55 L460,100 L560,60 L680,100 L800,72 L920,102 L1000,85" stroke-width="5"/><line x1="0" y1="138" x2="1000" y2="138" stroke-width="3" opacity=".5"/></svg>
+<div style="text-align:center"><h1 class="hero-title">Cardápio</h1><p class="hero-sub">Faça seu pedido e retire no local</p></div>
+<div class="promo-banner" id="promoBanner" style="display:none"><div class="promo-banner-inner"><span class="icon">🔥</span><div class="txt"><strong id="promoTitle"></strong><span id="promoText"></span></div></div></div>
+<nav class="cat-nav" id="catNav"></nav><main id="main"></main>
+<footer>Cantin do Sertão — feito com carinho pra você retirar quentinho 🌵</footer>
+<button class="cart-bar" id="cartBar"><span class="cart-left"><span class="count" id="cartCount">0</span> ver carrinho</span><span class="cart-total" id="cartBarTotal">R$ 0,00</span></button>
+<div class="zoom-overlay" id="zoomOverlay"><button class="zoom-close" id="zoomClose">&times;</button><img id="zoomImg" src="" alt=""><p class="zoom-caption" id="zoomCaption"></p></div>
 <div class="overlay" id="overlay"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-header"><h2>Seu pedido</h2><button class="close-btn" id="closeDrawer">&times;</button></div>
-  <div class="drawer-body" id="drawerBody">
-    <div class="empty-cart" id="emptyCart">Seu carrinho está vazio.<br>Adicione algo gostoso do cardápio 🌵</div>
-    <div id="cartLines"></div>
-    <form class="checkout-form" id="checkoutForm" style="display:none">
-      <div class="field"><label for="fName">Nome</label><input type="text" id="fName" placeholder="Seu nome" required></div>
-      <div class="field"><label for="fPhone">Telefone / WhatsApp</label><input type="tel" id="fPhone" placeholder="(11) 90000-0000" required></div>
-      <div class="field">
-        <label>Como vai receber?</label>
-        <div class="radio-row">
-          <label class="radio-opt active" data-val="entrega"><input type="radio" name="delivery" value="entrega" checked> Entrega</label>
-          <label class="radio-opt" data-val="retirada"><input type="radio" name="delivery" value="retirada"> Retirada</label>
-        </div>
-      </div>
-      <div class="field" id="addr-field"><label for="fAddr">Endereço de entrega</label><input type="text" id="fAddr" placeholder="Rua, número, bairro"></div>
-      <div class="field">
-        <label for="fPay">Forma de pagamento</label>
-        <select id="fPay"><option value="Pix">Pix</option><option value="Dinheiro">Dinheiro</option><option value="Cartão na entrega">Cartão na entrega</option></select>
-      </div>
-      <div class="field"><label for="fObs">Observações (opcional)</label><textarea id="fObs" placeholder="Ex: sem cebola, troco pra R$50..."></textarea></div>
-    </form>
-  </div>
-  <div class="drawer-footer">
-    <div class="total-row"><span class="lbl">Total</span><span class="val" id="drawerTotal">R$ 0,00</span></div>
-    <button class="whats-btn" id="sendWhats" disabled>Enviar pedido no WhatsApp</button>
-    <p class="form-hint">Ao enviar, o WhatsApp abre com seu pedido já preenchido — é só confirmar o envio.</p>
-  </div>
-</div>
-
+<div class="drawer" id="drawer"><div class="drawer-header"><h2>Seu pedido</h2><button class="close-btn" id="closeDrawer">&times;</button></div><div class="drawer-body"><div class="empty-cart" id="emptyCart">Seu carrinho está vazio.<br>Adicione algo gostoso do cardápio 🌵</div><div id="cartLines"></div><form class="checkout-form" id="checkoutForm" style="display:none"><div class="field"><label for="fName">Nome</label><input type="text" id="fName" placeholder="Seu nome" required></div><div class="field"><label for="fPhone">Telefone / WhatsApp</label><input type="tel" id="fPhone" placeholder="(11) 90000-0000" required></div><div class="field"><label>Como vai receber?</label><div class="pickup-box">Retirada no local</div></div><div class="field"><label for="fPay">Forma de pagamento</label><select id="fPay"><option value="Pix">Pix</option><option value="Dinheiro">Dinheiro</option><option value="Cartão na retirada">Cartão na retirada</option></select></div><div class="field"><label for="fObs">Observações (opcional)</label><textarea id="fObs" placeholder="Ex: sem cebola, troco pra R$50..."></textarea></div></form></div><div class="drawer-footer"><div class="total-row"><span class="lbl">Total</span><span class="val" id="drawerTotal">R$ 0,00</span></div><button class="whats-btn" id="sendWhats" disabled>Enviar pedido no WhatsApp</button><p class="form-hint">Ao enviar, o WhatsApp abre com seu pedido já preenchido — é só confirmar.</p></div></div>
 <script>
-/* ======================================================================
-   PAINEL DE EDIÇÃO — mexa só aqui embaixo pra atualizar o site.
-   Não precisa tocar em mais nada abaixo da linha "FIM DO PAINEL".
-   ====================================================================== */
-
-/* 1) Número de WhatsApp da loja (só números, com código do país + DDD) */
-const WHATSAPP_NUMBER = "5511945702609"; // <-- TROQUE AQUI
-
-/* 2) Promoção do dia — deixe ACTIVE como false pra esconder a faixa vermelha */
-const DAILY_PROMO = {
-  active: false,
-  title: "Promoção de hoje!",
-  text: "Tapioca de Carne Seca por R$ 9,90 até às 20h"
-};
-
-/* 3) Categorias — a ordem aqui é a ordem das abas no site.
-      Pra criar uma categoria nova (ex: Caldos), só adicione uma linha:
-      { id:"caldos", label:"Caldos" }                                    */
-const CATEGORIES = [
-  { id: "1sabor",    label: "1 Sabor" },
-  { id: "2sabores",  label: "Salgadas · 2 Sabores" },
-  { id: "3sabores",  label: "Tapioca 3 Sabores" },
-  { id: "doce",      label: "Tapioca Doce" }
+const WHATSAPP_NUMBER="5511945702609";
+const DAILY_PROMO={active:false,title:"Promoção de hoje!",text:"Tapioca de Carne Seca por R$ 9,90 até às 20h"};
+const CATEGORIES=[{id:"1sabor",label:"1 Sabor"},{id:"2sabores",label:"Salgadas · 2 Sabores"},{id:"3sabores",label:"Tapioca 3 Sabores"},{id:"doce",label:"Tapioca Doce"}];
+const MENU=[
+{id:"s-frango",cat:"1sabor",name:"Frango",desc:"Tapioca recheada com frango desfiado, tomate e cebola. Simples e deliciosa.",price:13,promo:null,photo:"fotos/frango.jpg"},
+{id:"s-carneseca",cat:"1sabor",name:"Carne Seca",desc:"Tapioca crocante recheada com carne seca desfiada, cebola e tomate fresquinho. Um clássico do sertão, feito na hora!",price:17,promo:null,photo:"fotos/carne-seca.jpg"},
+{id:"s-calabresa",cat:"1sabor",name:"Calabresa",desc:"Tapioca recheada com calabresa, tomate e cebola. Simples e deliciosa.",price:12,promo:null,photo:"fotos/calabresa.jpg"},
+{id:"s-catupiry",cat:"1sabor",name:"Catupiry",desc:"Tapioca recheada com catupiry cremoso, tomate e cebola. Simples e deliciosa.",price:14,promo:null,photo:null},
+{id:"s-mussarela",cat:"1sabor",name:"Mussarela",desc:"Tapioca recheada com mussarela derretida, tomate e cebola. Simples e deliciosa.",price:15,promo:null,photo:null},
+{id:"s-presunto",cat:"1sabor",name:"Presunto",desc:"Tapioca recheada com presunto, tomate e cebola. Simples e deliciosa.",price:17,promo:null,photo:null},
+{id:"s-ovo",cat:"1sabor",name:"Ovo",desc:"Tapioca recheada com ovo, tomate e cebola. Simples e deliciosa.",price:16,promo:null,photo:"fotos/ovo.jpg"},
+{id:"d-bauru",cat:"2sabores",name:"Bauru",desc:"Tapioca crocante recheada com queijo, presunto e tomate fresquinho. Um clássico que nunca sai de moda!",price:22,promo:null,photo:"fotos/bauru.jpg"},
+{id:"d-carnesecacatup",cat:"2sabores",name:"Carne Seca c/ Catupiry",desc:"Tapioca recheada com carne seca desfiada, catupiry cremoso e tomate. Sabor sertanejo que derrete na boca.",price:20,promo:null,photo:"fotos/carneseca-catupiry.jpg"},
+{id:"d-frangocatup",cat:"2sabores",name:"Frango Catupiry",desc:"Tapioca recheada com frango desfiado, catupiry cremoso e tomate fresquinho. Leve e saborosa.",price:15,promo:null,photo:"fotos/frango-catupiry.jpg"},
+{id:"d-calabcatup",cat:"2sabores",name:"Calabresa + Catupiry",desc:"Tapioca recheada com calabresa, catupiry cremoso, tomate e cebola. Combinação clássica e irresistível.",price:14,promo:null,photo:null},
+{id:"d-calabmuss",cat:"2sabores",name:"Calabresa + Mussarela",desc:"Tapioca recheada com calabresa, mussarela derretida, tomate e cebola. Sabor marcante em cada mordida.",price:15,promo:null,photo:null},
+{id:"d-frangomuss",cat:"2sabores",name:"Frango + Mussarela",desc:"Tapioca recheada com frango desfiado, mussarela derretida e tomate fresquinho.",price:16,promo:null,photo:null},
+{id:"d-carnesecamuss",cat:"2sabores",name:"Carne Seca + Mussarela",desc:"Tapioca recheada com carne seca desfiada, mussarela derretida e tomate. Tradição nordestina no seu prato.",price:21,promo:null,photo:"fotos/carneseca-mussarela.jpg"},
+{id:"d-2queijos",cat:"2sabores",name:"2 Queijos",desc:"Tapioca recheada com mussarela e catupiry, duas texturas cremosas, e tomate fresquinho.",price:17,promo:null,photo:"fotos/2-queijos.jpg"},
+{id:"d-pizza",cat:"2sabores",name:"Pizza",desc:"Tapioca recheada com mussarela, tomate, azeitona e orégano. O sabor de pizza numa tapioca!",price:17,promo:null,photo:"fotos/pizza.jpg"},
+{id:"t3-carneseca2q",cat:"3sabores",name:"Carne Seca 2 Queijos",desc:"Tapioca recheada com carne seca desfiada, mussarela, catupiry, tomate e cebola. Recheio generoso pra quem é fã de sabor forte.",price:22,promo:null,photo:"fotos/carneseca-2queijos.jpg"},
+{id:"t3-calabresa2q",cat:"3sabores",name:"Calabresa 2 Queijos",desc:"Tapioca recheada com calabresa, mussarela, catupiry, tomate e cebola. Um verdadeiro festival de sabores.",price:17,promo:null,photo:"fotos/calabresa-2queijos.jpg"},
+{id:"t3-frango2q",cat:"3sabores",name:"Frango 2 Queijos",desc:"Tapioca recheada com frango desfiado, mussarela, catupiry e tomate. Cremosa e cheia de sabor.",price:19,promo:null,photo:"fotos/frango-2queijos.jpg"},
+{id:"doce-avela",cat:"doce",name:"Avelã c/ Banana",desc:"Tapioca doce recheada com creme de avelã e banana fresquinha. Combinação irresistível pra adoçar o dia.",price:16,promo:null,photo:"fotos/avela-banana.jpg"},
+{id:"doce-leitecond",cat:"doce",name:"Leite Condensado c/ Coco",desc:"Tapioca doce recheada com leite condensado cremoso e coco ralado. Um clássico brasileiro.",price:16,promo:null,photo:"fotos/leite-condensado-coco.jpg"}
 ];
-
-/* 4) Produtos — cada { } é um item do cardápio.
-   id       -> um código único, sem espaço (ex: "t1", "t2", "caldo1")
-   cat      -> tem que ser igual ao "id" de uma categoria lá em cima
-   name     -> nome do produto
-   desc     -> descrição curta
-   price    -> preço normal (número, sem "R$", use ponto pra centavos: 12.50)
-   promo    -> preço promocional (opcional). Deixe null se não tiver promoção
-   photo    -> caminho do arquivo de foto dentro da pasta "fotos/", ou null
-               se ainda não tiver foto (aparece um ícone no lugar)
-
-   Pra trocar uma foto: coloque o arquivo novo dentro da pasta "fotos/"
-   e escreva o nome dele aqui (ex: "fotos/tapioca-queijo.jpg").
-*/
-const MENU = [
-  /* ---- 1 Sabor ---- */
-  { id: "s-frango",    cat: "1sabor", name: "Frango",     desc: "Tapioca recheada com frango desfiado, tomate e cebola. Simples e deliciosa.", price: 13.00, promo: null, photo: "fotos/frango.jpg" },
-  { id: "s-carneseca", cat: "1sabor", name: "Carne Seca", desc: "Tapioca crocante recheada com carne seca desfiada, cebola e tomate fresquinho. Um clássico do sertão, feito na hora!", price: 17.00, promo: null, photo: "fotos/carne-seca.jpg" },
-  { id: "s-calabresa", cat: "1sabor", name: "Calabresa",  desc: "Tapioca recheada com calabresa, tomate e cebola. Simples e deliciosa.", price: 12.00, promo: null, photo: "fotos/calabresa.jpg" },
-  { id: "s-catupiry",  cat: "1sabor", name: "Catupiry",   desc: "Tapioca recheada com catupiry cremoso, tomate e cebola. Simples e deliciosa.", price: 14.00, promo: null, photo: null },
-  { id: "s-mussarela", cat: "1sabor", name: "Mussarela",  desc: "Tapioca recheada com mussarela derretida, tomate e cebola. Simples e deliciosa.", price: 15.00, promo: null, photo: null },
-  { id: "s-presunto",  cat: "1sabor", name: "Presunto",   desc: "Tapioca recheada com presunto, tomate e cebola. Simples e deliciosa.", price: 17.00, promo: null, photo: null },
-  { id: "s-ovo",       cat: "1sabor", name: "Ovo",        desc: "Tapioca recheada com ovo, tomate e cebola. Simples e deliciosa.", price: 16.00, promo: null, photo: "fotos/ovo.jpg" },
-
-  /* ---- Salgadas — 2 Sabores ---- */
-  { id: "d-bauru",         cat: "2sabores", name: "Bauru",                     desc: "Tapioca crocante recheada com queijo, presunto e tomate fresquinho. Um clássico que nunca sai de moda!", price: 22.00, promo: null, photo: "fotos/bauru.jpg" },
-  { id: "d-carnesecacatup",cat: "2sabores", name: "Carne Seca c/ Catupiry",    desc: "Tapioca recheada com carne seca desfiada, catupiry cremoso e tomate. Sabor sertanejo que derrete na boca.", price: 20.00, promo: null, photo: "fotos/carneseca-catupiry.jpg" },
-  { id: "d-frangocatup",   cat: "2sabores", name: "Frango Catupiry",           desc: "Tapioca recheada com frango desfiado, catupiry cremoso e tomate fresquinho. Leve e saborosa.", price: 15.00, promo: null, photo: "fotos/frango-catupiry.jpg" },
-  { id: "d-calabcatup",    cat: "2sabores", name: "Calabresa + Catupiry",      desc: "Tapioca recheada com calabresa, catupiry cremoso, tomate e cebola. Combinação clássica e irresistível.", price: 14.00, promo: null, photo: null },
-  { id: "d-calabmuss",     cat: "2sabores", name: "Calabresa + Mussarela",     desc: "Tapioca recheada com calabresa, mussarela derretida, tomate e cebola. Sabor marcante em cada mordida.", price: 15.00, promo: null, photo: null },
-  { id: "d-frangomuss",    cat: "2sabores", name: "Frango + Mussarela",        desc: "Tapioca recheada com frango desfiado, mussarela derretida e tomate fresquinho.", price: 16.00, promo: null, photo: null },
-  { id: "d-carnesecamuss", cat: "2sabores", name: "Carne Seca + Mussarela",    desc: "Tapioca recheada com carne seca desfiada, mussarela derretida e tomate. Tradição nordestina no seu prato.", price: 21.00, promo: null, photo: "fotos/carneseca-mussarela.jpg" },
-  { id: "d-2queijos",      cat: "2sabores", name: "2 Queijos",                 desc: "Tapioca recheada com mussarela e catupiry, duas texturas cremosas, e tomate fresquinho.", price: 17.00, promo: null, photo: "fotos/2-queijos.jpg" },
-  { id: "d-pizza",         cat: "2sabores", name: "Pizza",                     desc: "Tapioca recheada com mussarela, tomate, azeitona e orégano. O sabor de pizza numa tapioca!", price: 17.00, promo: null, photo: "fotos/pizza.jpg" },
-
-  /* ---- Tapioca 3 Sabores ---- */
-  { id: "t3-carneseca2q", cat: "3sabores", name: "Carne Seca 2 Queijos", desc: "Tapioca recheada com carne seca desfiada, mussarela, catupiry, tomate e cebola. Recheio generoso pra quem é fã de sabor forte.", price: 22.00, promo: null, photo: "fotos/carneseca-2queijos.jpg" },
-  { id: "t3-calabresa2q", cat: "3sabores", name: "Calabresa 2 Queijos",  desc: "Tapioca recheada com calabresa, mussarela, catupiry, tomate e cebola. Um verdadeiro festival de sabores.", price: 17.00, promo: null, photo: "fotos/calabresa-2queijos.jpg" },
-  { id: "t3-frango2q",    cat: "3sabores", name: "Frango 2 Queijos",     desc: "Tapioca recheada com frango desfiado, mussarela, catupiry e tomate. Cremosa e cheia de sabor.", price: 19.00, promo: null, photo: "fotos/frango-2queijos.jpg" },
-
-  /* ---- Tapioca Doce ---- */
-  { id: "doce-avela",  cat: "doce", name: "Avelã c/ Banana",             desc: "Tapioca doce recheada com creme de avelã e banana fresquinha. Combinação irresistível pra adoçar o dia.", price: 16.00, promo: null, photo: "fotos/avela-banana.jpg" },
-  { id: "doce-leitecond", cat: "doce", name: "Leite Condensado c/ Coco", desc: "Tapioca doce recheada com leite condensado cremoso e coco ralado. Um clássico brasileiro.", price: 16.00, promo: null, photo: "fotos/leite-condensado-coco.jpg" }
-];
-
-/* ====================== FIM DO PAINEL — não precisa mexer daqui pra baixo ====================== */
-
-const cart = {};
-function money(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
-const placeholderIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>`;
-const zoomIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M9 11h4M11 9v4"/></svg>`;
-
-function buildNav(){
-  const nav = document.getElementById('catNav');
-  nav.innerHTML = CATEGORIES.map((c,i) =>
-    `<button class="cat-btn ${i===0?'active':''}" data-cat="${c.id}">${c.label}</button>`
-  ).join('');
-  nav.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.onclick = () => {
-      nav.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('main section').forEach(s => s.style.display = 'none');
-      document.getElementById('cat-'+btn.dataset.cat).style.display = 'block';
-    };
-  });
-}
-
-function buildMenu(){
-  const main = document.getElementById('main');
-  main.innerHTML = CATEGORIES.map((c,i) => {
-    const items = MENU.filter(m => m.cat === c.id);
-    if(items.length === 0) return '';
-    return `
-      <section id="cat-${c.id}" style="${i===0?'':'display:none'}">
-        <h2 class="section-title">${c.label}</h2>
-        ${items.map(itemCard).join('')}
-      </section>`;
-  }).join('');
-
-  main.querySelectorAll('.frame.has-photo').forEach(frame => {
-    frame.onclick = () => openZoom(frame.dataset.zoomSrc, frame.dataset.zoomName);
-  });
-}
-
-const zoomOverlay = document.getElementById('zoomOverlay');
-function openZoom(src, name){
-  document.getElementById('zoomImg').src = src;
-  document.getElementById('zoomImg').alt = name;
-  document.getElementById('zoomCaption').textContent = name;
-  zoomOverlay.classList.add('show');
-}
-function closeZoom(){ zoomOverlay.classList.remove('show'); }
-document.getElementById('zoomClose').onclick = closeZoom;
-zoomOverlay.addEventListener('click', (e) => { if(e.target === zoomOverlay) closeZoom(); });
-
-function itemCard(item){
-  const hasPromo = item.promo !== null && item.promo !== undefined;
-  const activePrice = hasPromo ? item.promo : item.price;
-  const photoHtml = item.photo
-    ? `<img src="${item.photo}" alt="${item.name}"><span class="zoom-hint">${zoomIcon}</span><span class="price-tag">${money(activePrice)}</span>`
-    : `${placeholderIcon}`;
-  return `
-    <div class="item-card ${hasPromo?'is-promo':''}">
-      ${hasPromo ? '<span class="promo-ribbon">Promoção</span>' : ''}
-      <div class="frame ${item.photo?'has-photo':'no-photo'}" ${item.photo?`data-zoom-src="${item.photo}" data-zoom-name="${item.name}"`:''}>${photoHtml}</div>
-      <div class="item-info">
-        <div class="item-name">${item.name}</div>
-        <div class="item-desc">${item.desc}</div>
-        <div class="item-bottom">
-          <span class="item-price">${hasPromo ? `<span class="old">${money(item.price)}</span>` : ''}${money(activePrice)}</span>
-          <div class="qty-control" data-id="${item.id}" data-name="${item.name}" data-price="${activePrice}"></div>
-        </div>
-      </div>
-    </div>`;
-}
-
-function renderStepper(container){
-  const id = container.dataset.id, name = container.dataset.name, price = parseFloat(container.dataset.price);
-  const qty = cart[id]?.qty || 0;
-  if(qty === 0){
-    container.innerHTML = `<button class="add-btn" data-add>Adicionar</button>`;
-    container.querySelector('[data-add]').onclick = () => { cart[id] = {name, price, qty:1}; renderStepper(container); updateCart(); };
-  } else {
-    container.innerHTML = `<div class="stepper"><button data-minus>−</button><span class="qty">${qty}</span><button data-plus>+</button></div>`;
-    container.querySelector('[data-minus]').onclick = () => { cart[id].qty--; if(cart[id].qty<=0) delete cart[id]; renderStepper(container); updateCart(); };
-    container.querySelector('[data-plus]').onclick = () => { cart[id].qty++; renderStepper(container); updateCart(); };
-  }
-}
-
-function cartTotal(){ return Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0); }
-function cartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
-
-function updateCart(){
-  const count = cartCount(), total = cartTotal();
-  const bar = document.getElementById('cartBar');
-  document.getElementById('cartCount').textContent = count;
-  document.getElementById('cartBarTotal').textContent = money(total);
-  bar.classList.toggle('show', count > 0);
-  document.getElementById('drawerTotal').textContent = money(total);
-
-  const linesWrap = document.getElementById('cartLines');
-  const empty = document.getElementById('emptyCart');
-  const form = document.getElementById('checkoutForm');
-  const sendBtn = document.getElementById('sendWhats');
-
-  if(count === 0){ linesWrap.innerHTML=''; empty.style.display='block'; form.style.display='none'; sendBtn.disabled=true; return; }
-  empty.style.display = 'none'; form.style.display = 'block'; sendBtn.disabled = false;
-
-  linesWrap.innerHTML = Object.entries(cart).map(([id,item]) => `
-    <div class="cart-line">
-      <div style="flex:1"><div class="cart-line-name">${item.qty}x ${item.name}</div><div class="cart-line-price">${money(item.price*item.qty)}</div></div>
-      <button class="cart-line-remove" data-remove="${id}">remover</button>
-    </div>`).join('');
-
-  linesWrap.querySelectorAll('[data-remove]').forEach(btn => {
-    btn.onclick = () => {
-      const id = btn.dataset.remove; delete cart[id];
-      const ctrl = document.querySelector(`.qty-control[data-id="${id}"]`);
-      if(ctrl) renderStepper(ctrl);
-      updateCart();
-    };
-  });
-}
-
-const drawer = document.getElementById('drawer'), overlay = document.getElementById('overlay');
-function openDrawer(){ drawer.classList.add('show'); overlay.classList.add('show'); }
-function closeDrawer(){ drawer.classList.remove('show'); overlay.classList.remove('show'); }
-document.getElementById('cartBar').onclick = openDrawer;
-document.getElementById('closeDrawer').onclick = closeDrawer;
-overlay.onclick = closeDrawer;
-
-document.querySelectorAll('.radio-opt').forEach(opt => {
-  opt.addEventListener('click', () => {
-    document.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('active'));
-    opt.classList.add('active'); opt.querySelector('input').checked = true;
-    document.getElementById('addr-field').style.display = opt.dataset.val === 'entrega' ? 'block' : 'none';
-  });
-});
-
-document.getElementById('sendWhats').onclick = () => {
-  const name = document.getElementById('fName').value.trim();
-  const phone = document.getElementById('fPhone').value.trim();
-  const deliveryType = document.querySelector('input[name=delivery]:checked').value;
-  const addr = document.getElementById('fAddr').value.trim();
-  const pay = document.getElementById('fPay').value;
-  const obs = document.getElementById('fObs').value.trim();
-
-  if(!name || !phone){ alert('Preencha seu nome e telefone antes de enviar.'); return; }
-  if(deliveryType === 'entrega' && !addr){ alert('Informe o endereço de entrega.'); return; }
-
-  let msg = `*Novo pedido — Cantin do Sertão* 🌵\n\n`;
-  msg += Object.values(cart).map(i => `${i.qty}x ${i.name} — ${money(i.price*i.qty)}`).join('\n');
-  msg += `\n\n*Total: ${money(cartTotal())}*\n\n`;
-  msg += `*Nome:* ${name}\n*Telefone:* ${phone}\n*Entrega:* ${deliveryType === 'entrega' ? 'Entrega' : 'Retirada no local'}\n`;
-  if(deliveryType === 'entrega') msg += `*Endereço:* ${addr}\n`;
-  msg += `*Pagamento:* ${pay}\n`;
-  if(obs) msg += `*Observações:* ${obs}\n`;
-
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-};
-
-/* montar tudo */
-if(DAILY_PROMO.active){
-  document.getElementById('promoBanner').style.display = 'block';
-  document.getElementById('promoTitle').textContent = DAILY_PROMO.title;
-  document.getElementById('promoText').textContent = DAILY_PROMO.text;
-}
-buildNav();
-buildMenu();
-document.querySelectorAll('.qty-control').forEach(renderStepper);
-updateCart();
+const cart={};
+const money=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const placeholderIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>';
+const zoomIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M9 11h4M11 9v4"/></svg>';
+function buildNav(){const nav=document.getElementById('catNav');nav.innerHTML=CATEGORIES.map((c,i)=>`<button class="cat-btn ${i===0?'active':''}" data-cat="${c.id}">${c.label}</button>`).join('');nav.querySelectorAll('.cat-btn').forEach(btn=>btn.onclick=()=>{nav.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('main section').forEach(s=>s.style.display='none');document.getElementById('cat-'+btn.dataset.cat).style.display='block'})}
+function itemCard(item){const hasPromo=item.promo!=null,price=hasPromo?item.promo:item.price,photo=item.photo?`<img src="${item.photo}" alt="${item.name}"><span class="zoom-hint">${zoomIcon}</span><span class="price-tag">${money(price)}</span>`:placeholderIcon;return `<div class="item-card ${hasPromo?'is-promo':''}">${hasPromo?'<span class="promo-ribbon">Promoção</span>':''}<div class="frame ${item.photo?'has-photo':'no-photo'}" ${item.photo?`data-src="${item.photo}" data-name="${item.name}"`:''}>${photo}</div><div class="item-info"><div class="item-name">${item.name}</div><div class="item-desc">${item.desc}</div><div class="item-bottom"><span class="item-price">${hasPromo?`<span class="old">${money(item.price)}</span>`:''}${money(price)}</span><div class="qty-control" data-id="${item.id}" data-name="${item.name}" data-price="${price}"></div></div></div></div>`}
+function buildMenu(){const main=document.getElementById('main');main.innerHTML=CATEGORIES.map((c,i)=>{const items=MENU.filter(m=>m.cat===c.id);return `<section id="cat-${c.id}" style="${i===0?'':'display:none'}"><h2 class="section-title">${c.label}</h2>${items.map(itemCard).join('')}</section>`}).join('');main.querySelectorAll('.frame.has-photo').forEach(f=>f.onclick=()=>openZoom(f.dataset.src,f.dataset.name))}
+function renderStepper(c){const id=c.dataset.id,name=c.dataset.name,price=parseFloat(c.dataset.price),qty=cart[id]?.qty||0;if(!qty){c.innerHTML='<button class="add-btn" data-add>Adicionar</button>';c.querySelector('[data-add]').onclick=()=>{cart[id]={name,price,qty:1};renderStepper(c);updateCart()}}else{c.innerHTML=`<div class="stepper"><button data-minus>−</button><span class="qty">${qty}</span><button data-plus>+</button></div>`;c.querySelector('[data-minus]').onclick=()=>{cart[id].qty--;if(cart[id].qty<=0)delete cart[id];renderStepper(c);updateCart()};c.querySelector('[data-plus]').onclick=()=>{cart[id].qty++;renderStepper(c);updateCart()}}}
+const cartTotal=()=>Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);const cartCount=()=>Object.values(cart).reduce((s,i)=>s+i.qty,0);
+function updateCart(){const count=cartCount(),total=cartTotal(),bar=document.getElementById('cartBar'),lines=document.getElementById('cartLines'),empty=document.getElementById('emptyCart'),form=document.getElementById('checkoutForm'),send=document.getElementById('sendWhats');document.getElementById('cartCount').textContent=count;document.getElementById('cartBarTotal').textContent=money(total);document.getElementById('drawerTotal').textContent=money(total);bar.classList.toggle('show',count>0);if(!count){lines.innerHTML='';empty.style.display='block';form.style.display='none';send.disabled=true;return}empty.style.display='none';form.style.display='block';send.disabled=false;lines.innerHTML=Object.entries(cart).map(([id,i])=>`<div class="cart-line"><div style="flex:1"><div class="cart-line-name">${i.qty}x ${i.name}</div><div class="cart-line-price">${money(i.price*i.qty)}</div></div><button class="cart-line-remove" data-remove="${id}">remover</button></div>`).join('');lines.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{const id=b.dataset.remove;delete cart[id];const ctrl=document.querySelector(`.qty-control[data-id="${id}"]`);if(ctrl)renderStepper(ctrl);updateCart()})}
+const drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay');document.getElementById('cartBar').onclick=()=>{drawer.classList.add('show');overlay.classList.add('show')};function closeDrawer(){drawer.classList.remove('show');overlay.classList.remove('show')}document.getElementById('closeDrawer').onclick=closeDrawer;overlay.onclick=closeDrawer;
+const zoomOverlay=document.getElementById('zoomOverlay');function openZoom(src,name){document.getElementById('zoomImg').src=src;document.getElementById('zoomCaption').textContent=name;zoomOverlay.classList.add('show')}document.getElementById('zoomClose').onclick=()=>zoomOverlay.classList.remove('show');zoomOverlay.onclick=e=>{if(e.target===zoomOverlay)zoomOverlay.classList.remove('show')};
+document.getElementById('sendWhats').onclick=()=>{const name=document.getElementById('fName').value.trim(),phone=document.getElementById('fPhone').value.trim(),pay=document.getElementById('fPay').value,obs=document.getElementById('fObs').value.trim();if(!name||!phone){alert('Preencha seu nome e telefone antes de enviar.');return}let msg='*Novo pedido — Cantin do Sertão* 🌵\n\n';msg+=Object.values(cart).map(i=>`${i.qty}x ${i.name} — ${money(i.price*i.qty)}`).join('\n');msg+=`\n\n*Total: ${money(cartTotal())}*\n\n*Nome:* ${name}\n*Telefone:* ${phone}\n*Recebimento:* Retirada no local\n*Pagamento:* ${pay}\n`;if(obs)msg+=`*Observações:* ${obs}\n`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank')};
+if(DAILY_PROMO.active){document.getElementById('promoBanner').style.display='block';document.getElementById('promoTitle').textContent=DAILY_PROMO.title;document.getElementById('promoText').textContent=DAILY_PROMO.text}buildNav();buildMenu();document.querySelectorAll('.qty-control').forEach(renderStepper);updateCart();
 </script>
 </body>
 </html>
